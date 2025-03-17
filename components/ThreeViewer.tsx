@@ -9,25 +9,29 @@ const ThreeViewer = ({ modelUrl }: { modelUrl: string }) => {
   const [fbxModel, setFbxModel] = useState<THREE.Object3D | null>(null);
 
   useEffect(() => {
+    // Асинхронная функция для загрузки модели
     const loadFBXModel = async () => {
-      // Динамически загружаем FBXLoader
-      const { FBXLoader } = await import('three/examples/jsm/loaders/FBXLoader');
-      
-      const loader = new FBXLoader();
-      loader.load(
-        modelUrl,
-        (object: THREE.Object3D) => {
-          object.scale.set(0.01, 0.01, 0.01); // Масштаб модели
+      try {
+        const { FBXLoader } = await import("three-stdlib"); // Используем FBXLoader из three-stdlib
 
-          setFbxModel(object);
-        },
-        undefined,
-        (error: ErrorEvent) => console.error("Ошибка загрузки модели FBX:", error.message)
-      );
+        const loader = new FBXLoader();
+        loader.load(
+          modelUrl, // Используем переданный путь к FBX модели
+          (object: THREE.Object3D) => {
+            object.scale.set(0.01, 0.01, 0.01); // Масштаб модели
+            setFbxModel(object);
+          },
+          undefined,
+          (error: ErrorEvent) => console.error("Ошибка загрузки модели FBX:", error.message)
+        );
+      } catch (error) {
+        console.error("Ошибка при загрузке FBXLoader:", error);
+      }
     };
 
-    loadFBXModel();
-  }, [modelUrl]);
+    loadFBXModel(); // Вызываем асинхронную функцию
+
+  }, [modelUrl]); // Будет вызвано, когда modelUrl изменится
 
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>

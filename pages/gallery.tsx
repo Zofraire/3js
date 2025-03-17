@@ -3,7 +3,7 @@ import Link from "next/link";
 const works = [
   { id: 1, title: "3D Model", type: "3D", thumbnail: "/images/3d-preview.jpg" },
   { id: 2, title: "Digital Art", type: "2D", thumbnail: "/images/2d-preview.jpg" },
-  { id: 3, title: "Video Demo", type: "video", fileUrl: "/videos/sample.mp4" },
+  { id: 3, title: "Video Demo", type: "video", fileUrl: "/videos/video.jpg" },
 
 ];
 

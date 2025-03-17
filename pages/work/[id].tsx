@@ -3,14 +3,9 @@
 import { GetServerSideProps } from "next";
 import ImageViewer from "../../components/ImageViewer";
 import ThreeViewer from "../../components/ThreeViewer";
+import { workData } from "../../data/data"; // Правильный путь
 
-const workData = {
-  1: { title: "3D Model", type: "3D", fileUrl: "/models/sample.glb" },
-  2: { title: "Digital Art", type: "2D", fileUrl: "/images/sample.jpg" },
-  3: { title: "Video Demo", type: "video", fileUrl: "/videos/sample.mp4" },
-};
-
-const WorkDetail = ({ work }: { work: any }) => {
+const WorkDetail = ({ work }: { work: { title: string; type: string; fileUrl: string } }) => {
   return (
     <div className="p-10">
       <h1 className="text-3xl">{work.title}</h1>
@@ -19,12 +14,10 @@ const WorkDetail = ({ work }: { work: any }) => {
       ) : work.type === "2D" ? (
         <ImageViewer imageUrl={work.fileUrl} alt={work.title} />
       ) : work.type === "video" ? (
-        <div className="video-container">
-          <video controls className="w-full h-auto">
-            <source src={work.fileUrl} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+        <video controls className="w-full h-auto">
+          <source src={work.fileUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       ) : null}
     </div>
   );
@@ -32,7 +25,10 @@ const WorkDetail = ({ work }: { work: any }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params!;
-  return { props: { work: workData[id] } };
+  const workId = parseInt(id as string, 10); // Преобразуем id в число
+  const work = workData[workId];
+
+  return { props: { work } };
 };
 
 export default WorkDetail;

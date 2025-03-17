@@ -1,7 +1,7 @@
 // components/Catalog.tsx
 
 import Link from 'next/link';
-import { workData } from 'pages/work/[id].tsx';
+import { workData } from '../data/data';
 
 const Catalog = () => {
   return (
