@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Кастомный класс для изменения размера */
+.custom-image {
+    width: 300px; /* Устанавливаем фиксированную ширину */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    object-fit: contain; /* Подгонка изображения, если оно слишком большое */
+  }
+  
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
