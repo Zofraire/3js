@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Кастомный класс для изменения размера */
+.custom-image {
+    width: 300px; /* Устанавливаем фиксированную ширину */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    object-fit: contain; /* Подгонка изображения, если оно слишком большое */
+  }
+  
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
